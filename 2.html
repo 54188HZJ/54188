@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			#div1{ width: 100px; height: 100px; background: red; position: absolute; right: 0px;}
+		</style>
+		
+		<script>
+			window.onscroll = function(){
+				var div = document.getElementById("div1");
+				var scrolltop = document.documentElement.scrollTop || document.body.scrollTop;
+//				div.style.top = scrolltop + (document.documentElement.clientHeight - div.offsetHeight) / 2 + 'px';
+				moue(parseInt(scrolltop + (document.documentElement.clientHeight - div.offsetHeight) / 2))
+			}
+			
+			var timer = null;
+			function moue(juLi){
+				var div = document.getElementById("div1");
+				clearInterval(timer);
+				timer = setInterval(function(){
+					var iSpeed = (juLi - div.offsetTop) / 10;
+					iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+					console.log(juLi + "-" + div.offsetTop + "=" + iSpeed);
+					if(div.offsetTop == juLi){
+						clearInterval(timer)
+					}else{
+						div.style.top = div.offsetTop + iSpeed + "px";
+					}
+				} , 30)
+			}
+		</script>
+	</head>
+	<body style="height: 3000px;">
+		<div id="div1"></div>
+	</body>
+</html>
